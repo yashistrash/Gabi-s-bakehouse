@@ -173,8 +173,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
                 entry.target.classList.add('animated');
 
+                const sectionLabel = entry.target.querySelector('.section-label');
+
                 anime({
-                    targets: entry.target.querySelector('.section-label'),
+                    targets: sectionLabel,
                     opacity: [0, 1],
                     translateY: [20, 0],
                     duration: 600,
@@ -190,24 +192,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     easing: 'easeOutQuad'
                 });
 
-                const underline = document.createElement('div');
-                underline.style.position = 'absolute';
-                underline.style.bottom = '-10px';
-                underline.style.left = '50%';
-                underline.style.transform = 'translateX(-50%)';
-                underline.style.height = '3px';
-                underline.style.background = 'var(--accent-rose)';
-                underline.style.width = '0';
-                entry.target.style.position = 'relative';
-                entry.target.appendChild(underline);
+                if (sectionLabel) {
+                    const underline = document.createElement('div');
+                    underline.style.position = 'absolute';
+                    underline.style.bottom = '-8px';
+                    underline.style.left = '50%';
+                    underline.style.transform = 'translateX(-50%)';
+                    underline.style.height = '3px';
+                    underline.style.background = 'var(--accent-rose)';
+                    underline.style.width = '0';
 
-                anime({
-                    targets: underline,
-                    width: ['0', '60px'],
-                    duration: 1000,
-                    delay: 500,
-                    easing: 'easeOutQuad'
-                });
+                    sectionLabel.style.position = 'relative';
+                    sectionLabel.style.display = 'inline-block';
+                    sectionLabel.appendChild(underline);
+
+                    anime({
+                        targets: underline,
+                        width: ['0', '60px'],
+                        duration: 1000,
+                        delay: 500,
+                        easing: 'easeOutQuad'
+                    });
+                }
             }
         });
     }, {
@@ -323,15 +329,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 easing: 'easeOutQuad'
             });
         });
-    });
-
-    const testimonialSlider = anime({
-        targets: '.testimonial-card',
-        translateX: [100, 0],
-        opacity: [0, 1],
-        duration: 800,
-        easing: 'easeOutQuad',
-        autoplay: false
     });
 
     const contactForm = document.getElementById('contactForm');

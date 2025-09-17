@@ -120,30 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 16);
     }
 
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    const dots = document.querySelectorAll('.dot');
-    let currentTestimonial = 0;
-
-    function showTestimonial(index) {
-        testimonialCards.forEach(card => card.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-
-        testimonialCards[index].classList.add('active');
-        dots[index].classList.add('active');
-    }
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            currentTestimonial = index;
-            showTestimonial(currentTestimonial);
-        });
-    });
-
-    setInterval(() => {
-        currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-        showTestimonial(currentTestimonial);
-    }, 5000);
-
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
