@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Floating Bakery Elements Container -->
+    <div class="floating-bakery-container" id="floatingContainer"></div>
 
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -54,8 +59,13 @@
                     <span class="title-line-1">Welcome to</span>
                     <span class="title-line-2">Gabi's Bakehouse</span>
                 </h1>
-                <p class="hero-tagline">Artisan Delights, Baked with Love</p>
+                <p class="hero-tagline" id="rotatingTagline">Artisan Delights, Baked with Love</p>
                 <p class="hero-description">Where every bite tells a story of passion, tradition, and the finest ingredients</p>
+                <div class="bakery-badges">
+                    <span class="badge-item">🎂 Fresh Daily</span>
+                    <span class="badge-item">🍪 Handcrafted</span>
+                    <span class="badge-item">🧁 Made with Love</span>
+                </div>
                 <div class="hero-buttons">
                     <a href="#products" class="btn btn-primary">Explore Menu</a>
                     <a href="#contact" class="btn btn-secondary">Order Now</a>
@@ -171,7 +181,7 @@
 
                     <div class="product-card" data-product="rose-milk-blondie">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400&h=300&fit=crop" alt="Rose Milk Blondie">
+                            <img src="images\gallery\rose.png" alt="Rose Milk Blondie">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
