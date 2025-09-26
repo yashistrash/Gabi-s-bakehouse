@@ -128,8 +128,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo {
     display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.75rem;
     font-size: 1.5rem;
     position: relative;
     animation: logoFloat 4s ease-in-out infinite;
@@ -157,16 +157,38 @@ h1, h2, h3, h4, h5, h6 {
     100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
 }
 
+.logo-image {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.3));
+    transition: all 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.5));
+}
+
+.logo-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+}
+
 .logo-text {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
     color: var(--primary-brown);
+    font-size: 1.2rem;
 }
 
 .logo-accent {
     font-family: 'Dancing Script', cursive;
     color: var(--accent-rose);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    margin-top: -2px;
 }
 
 .nav-menu {
@@ -1432,8 +1454,53 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
+.info-pill:hover .icon::before {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
 .info-pill .icon {
     font-size: 1.2rem;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Phone Icon - Phone Symbol */
+.phone-icon::before {
+    content: '☎';
+    display: block;
+    width: 20px;
+    height: 20px;
+    color: var(--primary-purple);
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+}
+
+/* Email Icon - Mail Symbol */
+.email-icon::before {
+    content: '✉';
+    display: block;
+    width: 20px;
+    height: 20px;
+    color: var(--accent-pink);
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+}
+
+/* Clock Icon - Clock Symbol */
+.clock-icon::before {
+    content: '🕐';
+    display: block;
+    width: 20px;
+    height: 20px;
+    color: var(--primary-purple);
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
 }
 
 .visit-again-cta {
@@ -1547,6 +1614,19 @@ h1, h2, h3, h4, h5, h6 {
         display: flex;
     }
 
+    .logo-image {
+        width: 55px;
+        height: 55px;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .logo-accent {
+        font-size: 0.9rem;
+    }
+
     .nav-menu {
         position: fixed;
         top: 60px;
@@ -1637,6 +1717,19 @@ h1, h2, h3, h4, h5, h6 {
 
     .features-grid {
         grid-template-columns: 1fr;
+    }
+
+    .logo-image {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo-text {
+        font-size: 0.9rem;
+    }
+
+    .logo-accent {
+        font-size: 0.8rem;
     }
 
     .hero-title {
