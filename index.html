@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Gabi's Bakehouse - Artisan bakery offering handcrafted cakes, brownies, biscuits and authentic spice powders. Where traditional recipes meet modern artistry.">
     <meta name="keywords" content="bakery, cakes, brownies, red velvet, christmas cake, spices, sambar powder, health mix">
+    <meta name="author" content="Gabi's Bakehouse">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Gabi's Bakehouse - Artisan Delights, Baked with Love">
+    <meta property="og:description" content="Artisan bakery offering handcrafted cakes, brownies, biscuits and authentic spice powders. Where traditional recipes meet modern artistry.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/gallery/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gabi's Bakehouse - Artisan Delights, Baked with Love">
+    <meta name="twitter:description" content="Artisan bakery offering handcrafted cakes, brownies, biscuits and authentic spice powders.">
+    <meta name="twitter:image" content="images/gallery/logo.png">
     <title>Gabi's Bakehouse - Artisan Delights, Baked with Love</title>
 
     <!-- Favicon -->
@@ -13,7 +23,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"></noscript>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
@@ -105,7 +116,7 @@
                 <!-- Center content -->
                 <div class="hero-visual">
                     <div class="cake-card">
-                        <img src="images/hero/mainhero-Photoroom.png" alt="Pixel baker avatar in saree with chef hat and apron" class="cake-image pixel-hero cake-breathe" loading="eager">
+                        <img src="images/hero/mainhero-Photoroom.png" alt="Pixel baker avatar in saree with chef hat and apron" class="cake-image pixel-hero cake-breathe" loading="eager" width="400" height="400">
                     </div>
                 </div>
                 <div class="hero-content">
@@ -159,7 +170,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="images/hero/lady.png" alt="Gabi - Owner and Master Baker" class="img-responsive pixel-avatar">
+                    <img src="images/hero/lady.png" alt="Gabi - Owner and Master Baker" class="img-responsive pixel-avatar" width="300" height="400">
                     <div class="image-decoration"></div>
                 </div>
             </div>
@@ -205,7 +216,7 @@
                 <div class="products-grid">
                     <div class="product-card" data-product="chocolate-brownies">
                         <div class="product-image">
-                            <img src="images/gallery/Chocolate Brownies.jpg" alt="Chocolate Brownies">
+                            <img src="images/gallery/Chocolate Brownies.jpg" alt="Chocolate Brownies" width="300" height="200" loading="lazy">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
@@ -220,7 +231,7 @@
 
                     <div class="product-card" data-product="nuts-brownie">
                         <div class="product-image">
-                            <img src="images/gallery/Nuts Brownie.jpg" alt="Nuts Brownie">
+                            <img src="images/gallery/Nuts Brownie.jpg" alt="Nuts Brownie" width="300" height="200" loading="lazy">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
@@ -235,7 +246,7 @@
 
                     <div class="product-card" data-product="rose-milk-blondie">
                         <div class="product-image">
-                            <img src="images/gallery/rose.png" alt="Rose Milk Blondie">
+                            <img src="images/gallery/rose.png" alt="Rose Milk Blondie" width="300" height="200" loading="lazy">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
@@ -250,7 +261,7 @@
 
                     <div class="product-card" data-product="red-velvet">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=400&h=300&fit=crop" alt="Red Velvet">
+                            <img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=400&h=300&fit=crop" alt="Red Velvet" width="300" height="200" loading="lazy">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
@@ -265,7 +276,7 @@
 
                     <div class="product-card" data-product="homemade-chocolate">
                         <div class="product-image">
-                            <img src="images/gallery/Chocolate.jpg" alt="Homemade Chocolate">
+                            <img src="images/gallery/Chocolate.jpg" alt="Homemade Chocolate" width="300" height="200" loading="lazy">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
@@ -497,9 +508,9 @@
     <!-- Fixed 3D cake model (no circle) -->
     <model-viewer id="cornerModel" class="corner-model" src="images/hero/strawberry_pound_cake.glb" interaction-prompt="none" exposure="0.9" shadow-intensity="0.2" camera-target="auto" camera-orbit="0deg 90deg 120%" bounds="tight"></model-viewer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" defer></script>
 </body>
 </html>
