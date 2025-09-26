@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Immediate mobile-first approach: Make all product cards visible on mobile
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Force immediate visibility on mobile devices
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.classList.add('visible');
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+            card.style.animation = 'none';
+        });
+    } else {
+        // Desktop fallback: Make all product cards visible after short delay
+        setTimeout(() => {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.add('visible');
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+        }, 100);
+    }
     // Scroll-triggered rotation for corner model-viewer
     const cornerModel = document.getElementById('cornerModel');
     if (cornerModel) {
@@ -110,27 +131,57 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
+    let observer = null;
+    if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+    }
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        observer.observe(el);
+        if (observer) {
+            observer.observe(el);
+        } else {
+            el.classList.add('visible');
+        }
     });
 
     document.querySelectorAll('.product-card').forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
-        observer.observe(card);
+
+        // Only use intersection observer on desktop
+        if (!isMobile && observer) {
+            observer.observe(card);
+        } else {
+            card.classList.add('visible');
+        }
+    });
+
+    // Handle window resize and orientation changes
+    window.addEventListener('resize', function() {
+        const currentlyMobile = window.innerWidth <= 768;
+        if (currentlyMobile) {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                card.style.animation = 'none';
+                card.classList.add('visible');
+            });
+        }
     });
 
     document.querySelectorAll('.feature-card').forEach((card, index) => {
         card.classList.add('animate-on-scroll');
         card.style.animationDelay = `${index * 0.15}s`;
-        observer.observe(card);
+        if (observer) {
+            observer.observe(card);
+        } else {
+            card.classList.add('visible');
+        }
     });
 
     // Remove duplicate stat-number observer and counter (anime.js handles this)
@@ -495,17 +546,24 @@ document.querySelectorAll('.btn-order').forEach(button => {
 // Stats counters handled by anime.js in animations.js
 
 // Section Reveal Animations
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
-    });
-}, { threshold: 0.1 });
+let revealObserver = null;
+if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+}
 
 document.querySelectorAll('section').forEach(section => {
     section.classList.add('reveal-section');
-    revealObserver.observe(section);
+    if (revealObserver) {
+        revealObserver.observe(section);
+    } else {
+        section.classList.add('active');
+    }
 });
 
 // Add today's special banner

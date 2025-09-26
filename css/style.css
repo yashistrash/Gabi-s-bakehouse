@@ -1219,6 +1219,55 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(30px);
 }
 
+/* Force products to be visible on mobile immediately */
+@media (max-width: 768px) {
+    .product-card {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        animation: none !important;
+    }
+
+    /* Also ensure product grids are visible */
+    .products-grid {
+        opacity: 1 !important;
+    }
+
+    /* Make sure the entire products section is visible */
+    .products {
+        opacity: 1 !important;
+    }
+}
+
+/* Immediate fallback for all devices - products should be visible by default */
+.product-card {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Only apply animation effects on larger screens */
+@media (min-width: 769px) {
+    .product-card {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: productFallback 0.1s ease-in-out 1s forwards;
+    }
+}
+
+@keyframes productFallback {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Additional fallback: Force visibility if JS completely fails */
+.product-card.visible,
+.product-card.animate-on-scroll.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px var(--shadow-medium);
