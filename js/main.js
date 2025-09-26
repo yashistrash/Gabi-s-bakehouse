@@ -179,11 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             setTimeout(() => ripple.remove(), 600);
 
-            alert(`Thank you for your interest in ${productName}! Please contact us to place your order.`);
+            const whatsappNumber = '919036024688';
+            const message = `I want to place an order for ${productName}.`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
+            const newWindow = window.open(whatsappUrl, '_blank');
+            if (!newWindow) {
+                window.location.href = whatsappUrl;
             }
         });
     });

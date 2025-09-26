@@ -453,7 +453,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cake-card:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 10px 34px rgba(236, 72, 153, 0.28), 0 12px 38px rgba(236, 72, 153, 0.22);
+    box-shadow: none;
 }
 
 .cake-card:hover::after {
@@ -498,7 +498,7 @@ h1, h2, h3, h4, h5, h6 {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-    filter: drop-shadow(0 8px 24px rgba(236, 72, 153, 0.28)) drop-shadow(0 10px 28px rgba(236, 72, 153, 0.22));
+    filter: none !important;
 }
 
 /* Reduce hero avatar size by 25% on desktop */
