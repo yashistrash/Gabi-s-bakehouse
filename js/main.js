@@ -77,15 +77,14 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
 
-        const spans = mobileToggle.querySelectorAll('span');
         if (navMenu.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translateY(8px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+            mobileToggle.style.justifyContent = 'center';
+            mobileToggle.style.alignItems = 'center';
+            mobileToggle.innerHTML = '<div style="position: relative; width: 25px; height: 25px;"><span style="width: 25px; height: 3px; background: linear-gradient(90deg, var(--primary-purple), var(--accent-pink)); border-radius: 2px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg);"></span><span style="width: 25px; height: 3px; background: linear-gradient(90deg, var(--primary-purple), var(--accent-pink)); border-radius: 2px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);"></span></div>';
         } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
+            mobileToggle.style.justifyContent = '';
+            mobileToggle.style.alignItems = '';
+            mobileToggle.innerHTML = '<span></span><span></span><span></span>';
         }
     });
 
