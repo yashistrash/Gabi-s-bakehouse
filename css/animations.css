@@ -1,3 +1,17 @@
+.cake-breathe {
+    animation: cakeBreathe 6s ease-in-out infinite;
+}
+
+@keyframes cakeBreathe {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-6px) scale(1.01);
+    }
+}
+
+/* Keep breathe on mobile; no drop-shadows anywhere */
 @keyframes fadeInUp {
     from {
         opacity: 0;

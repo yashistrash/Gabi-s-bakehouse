@@ -22,6 +22,11 @@
     <div class="floating-bakery-container" id="floatingContainer"></div>
 
     <nav class="navbar" id="navbar">
+        <div class="navbar-decorations">
+            <span class="nav-float-item" style="--delay: 0s; --duration: 12s">🥐</span>
+            <span class="nav-float-item" style="--delay: 4s; --duration: 15s">🧁</span>
+            <span class="nav-float-item" style="--delay: 8s; --duration: 18s">🍪</span>
+        </div>
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
@@ -54,21 +59,63 @@
             </div>
         </div>
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-line-1">Welcome to</span>
-                    <span class="title-line-2">Gabi's Bakehouse</span>
-                </h1>
-                <p class="hero-tagline" id="rotatingTagline">Artisan Delights, Baked with Love</p>
-                <p class="hero-description">Where every bite tells a story of passion, tradition, and the finest ingredients</p>
-                <div class="bakery-badges">
-                    <span class="badge-item">🎂 Fresh Daily</span>
-                    <span class="badge-item">🍪 Handcrafted</span>
-                    <span class="badge-item">🧁 Made with Love</span>
+            <div class="hero-layout">
+                <!-- Artisan Elegance Decoration System -->
+                <div class="hero-side-decorations">
+                    <!-- Layer 1: Geometric Foundation -->
+                    <div class="geometric-shape"></div>
+                    <div class="geometric-shape"></div>
+                    <div class="geometric-shape polygon"></div>
+                    <div class="geometric-shape"></div>
+                    <div class="geometric-shape polygon"></div>
+
+                    <!-- Layer 2: Bakery Iconography -->
+                    <div class="bakery-icons">
+                        <div class="bakery-icon">🌾</div>
+                        <div class="bakery-icon">🥄</div>
+                        <div class="bakery-icon">🍯</div>
+                        <div class="bakery-icon">⚡</div>
+                    </div>
+
+                    <!-- Layer 3: Typography Accents -->
+                    <div class="typography-accents">
+                        <div class="typography-accent">Artisan</div>
+                        <div class="typography-accent">Fresh</div>
+                        <div class="typography-accent">Handcrafted</div>
+                    </div>
+
+                    <!-- Layer 4: Dot Matrix -->
+                    <div class="dot-matrix">
+                        <div class="dot-pattern"></div>
+                        <div class="dot-pattern medium"></div>
+                        <div class="dot-pattern large"></div>
+                        <div class="dot-pattern"></div>
+                        <div class="dot-pattern medium"></div>
+                        <div class="dot-pattern"></div>
+                    </div>
                 </div>
-                <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary">Explore Menu</a>
-                    <a href="#contact" class="btn btn-secondary">Order Now</a>
+
+                <!-- Center content -->
+                <div class="hero-visual">
+                    <div class="cake-card">
+                        <img src="images/hero/herocake.png" alt="Signature Cake" class="cake-image cake-breathe" loading="eager">
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-line-1">Welcome to</span>
+                        <span class="title-line-2">Gabi's Bakehouse</span>
+                    </h1>
+                    <p class="hero-tagline" id="rotatingTagline">Artisan Delights, Baked with Love</p>
+                    <p class="hero-description">Where every bite tells a story of passion, tradition, and the finest ingredients</p>
+                    <div class="bakery-badges">
+                        <span class="badge-item">Fresh Daily</span>
+                        <span class="badge-item">Handcrafted</span>
+                        <span class="badge-item">Made with Love</span>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-secondary">Order Now</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,7 +193,7 @@
                 <h2 class="section-title">Delicious Creations Await</h2>
             </div>
 
-            <div class="product-category">
+            <div class="product-category" id="bakery">
                 <h3 class="category-title">🍰 Cakes & Bakery</h3>
                 <div class="products-grid">
                     <div class="product-card" data-product="chocolate-brownies">
@@ -181,7 +228,7 @@
 
                     <div class="product-card" data-product="rose-milk-blondie">
                         <div class="product-image">
-                            <img src="images\gallery\rose.png" alt="Rose Milk Blondie">
+                            <img src="images/gallery/rose.png" alt="Rose Milk Blondie">
                             <div class="product-overlay">
                                 <span class="view-more">View Details</span>
                             </div>
@@ -432,7 +479,7 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <span class="logo-text">Gabi's</span>
-                    <span class="logo-accent">Bakehouse</span>
+                    <span class="logo-accent">Bakehouse</span>      
                 </div>
                 <p class="footer-tagline">Artisan Delights, Baked with Love</p>
                 <p class="footer-copy">&copy; 2024 Gabi's Bakehouse. All rights reserved.</p>
@@ -440,8 +487,12 @@
         </div>
     </footer>
 
+    <!-- Fixed 3D cake model (no circle) -->
+    <model-viewer id="cornerModel" class="corner-model" src="images/hero/strawberry_pound_cake.glb" interaction-prompt="none" exposure="0.9" shadow-intensity="0.2" camera-target="auto" camera-orbit="0deg 90deg 120%" bounds="tight"></model-viewer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </body>
 </html>

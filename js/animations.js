@@ -54,27 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         delay: 500
     });
 
-    anime({
-        targets: '.floating-item',
-        translateY: function() {
-            return anime.random(-20, 20);
-        },
-        translateX: function() {
-            return anime.random(-20, 20);
-        },
-        rotate: function() {
-            return anime.random(-15, 15);
-        },
-        duration: function() {
-            return anime.random(3000, 5000);
-        },
-        loop: true,
-        direction: 'alternate',
-        easing: 'easeInOutQuad',
-        delay: function(el, i) {
-            return i * 200;
-        }
-    });
+    // Removed conflicting floating-item animation to avoid overriding CSS keyframes
 
     const scrollElements = document.querySelectorAll('.product-card, .feature-card, .about-text, .about-image');
 

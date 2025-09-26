@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Scroll-triggered rotation for corner model-viewer
+    const cornerModel = document.getElementById('cornerModel');
+    if (cornerModel) {
+        let lastScrollY = window.scrollY;
+        let currentDeg = 0;
+        const sensitivity = 0.2; // degrees per pixel scrolled
+
+        window.addEventListener('scroll', () => {
+            const dy = window.scrollY - lastScrollY;
+            lastScrollY = window.scrollY;
+            currentDeg = (currentDeg + dy * sensitivity) % 360;
+            cornerModel.setAttribute('camera-orbit', `${currentDeg}deg 60deg 120%`);
+        }, { passive: true });
+    }
 
     const navbar = document.getElementById('navbar');
     const mobileToggle = document.getElementById('mobileToggle');
@@ -23,6 +37,18 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             navbar.style.transform = 'translateY(0)';
         }
+
+        // Update active nav link based on scroll position
+        const sections = document.querySelectorAll('section[id]');
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const link = document.querySelector(`a[href="#${section.id}"]`);
+
+            if (rect.top <= 100 && rect.bottom >= 100 && link) {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
 
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
@@ -64,6 +90,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 spans[2].style.transform = 'none';
             }
         });
+
+        // Add magnetic effect to nav links
+        link.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            this.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translate(0, 0)';
+        });
     });
 
     const observerOptions = {
@@ -75,10 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-
-                if (entry.target.classList.contains('stat-number')) {
-                    animateCounter(entry.target);
-                }
             }
         });
     }, observerOptions);
@@ -98,27 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 
-    document.querySelectorAll('.stat-number').forEach(stat => {
-        observer.observe(stat);
-    });
-
-    function animateCounter(element) {
-        const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000;
-        const start = 0;
-        const increment = target / (duration / 16);
-        let current = start;
-
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                element.textContent = target;
-                clearInterval(timer);
-            } else {
-                element.textContent = Math.floor(current);
-            }
-        }, 16);
-    }
+    // Remove duplicate stat-number observer and counter (anime.js handles this)
 
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -190,20 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const floatingElements = document.querySelectorAll('.floating-item');
-
-    document.addEventListener('mousemove', function(e) {
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-
-        floatingElements.forEach((element, index) => {
-            const speed = (index + 1) * 0.5;
-            const x = (mouseX - 0.5) * speed * 50;
-            const y = (mouseY - 0.5) * speed * 50;
-
-            element.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    });
+    // Removed floating-item mousemove transform to prevent conflicts with CSS keyframes
 
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
@@ -215,34 +217,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     el.style.transform = 'translateY(0)';
                 }, index * 200);
             });
+
+            // Initialize Artisan Elegance System
+            initializeEleganceSystem();
         }, 300);
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
+            if (this.classList.contains('nav-link')) return; // handled separately
             if (this.getAttribute('href').length > 1) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     const offsetTop = target.offsetTop - 60;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                 }
             }
         });
     });
 
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        document.body.style.pointerEvents = 'none';
-
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            document.body.style.pointerEvents = 'auto';
-        }, 100);
-    });
+    // Removed pointer-events disabling during scroll to avoid blocking interactions
 
     if ('loading' in HTMLImageElement.prototype) {
         const images = document.querySelectorAll('img');
@@ -286,6 +281,105 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 });
+
+// ============================================
+// ARTISAN ELEGANCE SYSTEM
+// ============================================
+
+function initializeEleganceSystem() {
+    // Staggered reveal of elegance elements
+    const geometricShapes = document.querySelectorAll('.geometric-shape');
+    const bakeryIcons = document.querySelectorAll('.bakery-icon');
+    const typographyAccents = document.querySelectorAll('.typography-accent');
+    const dotPatterns = document.querySelectorAll('.dot-pattern');
+
+    // Reveal geometric shapes
+    geometricShapes.forEach((shape, index) => {
+        setTimeout(() => {
+            shape.style.opacity = '1';
+        }, index * 800 + 500);
+    });
+
+    // Reveal bakery icons
+    bakeryIcons.forEach((icon, index) => {
+        setTimeout(() => {
+            icon.style.opacity = '1';
+        }, index * 1200 + 1500);
+    });
+
+    // Reveal typography accents
+    typographyAccents.forEach((text, index) => {
+        setTimeout(() => {
+            text.style.opacity = '1';
+        }, index * 2000 + 2000);
+    });
+
+    // Reveal dot patterns
+    dotPatterns.forEach((dot, index) => {
+        setTimeout(() => {
+            dot.style.opacity = '1';
+        }, index * 400 + 3000);
+    });
+}
+
+// Gentle parallax effect on mouse movement
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth) - 0.5;
+    mouseY = (e.clientY / window.innerHeight) - 0.5;
+});
+
+function updateParallax() {
+    targetX += (mouseX - targetX) * 0.02;
+    targetY += (mouseY - targetY) * 0.02;
+
+    const geometricShapes = document.querySelectorAll('.geometric-shape');
+    const bakeryIcons = document.querySelectorAll('.bakery-icon');
+    const typographyAccents = document.querySelectorAll('.typography-accent');
+
+    // Apply different parallax intensities to layers
+    geometricShapes.forEach((shape, index) => {
+        const intensity = (index + 1) * 0.3;
+        const x = targetX * intensity * 20;
+        const y = targetY * intensity * 20;
+        shape.style.transform = `translate(${x}px, ${y}px) scale(${1 + Math.abs(targetX) * 0.02})`;
+    });
+
+    bakeryIcons.forEach((icon, index) => {
+        const intensity = (index + 1) * 0.15;
+        const x = targetX * intensity * 15;
+        const y = targetY * intensity * 15;
+        icon.style.transform = `translate(${x}px, ${y}px) rotate(${targetX * 2}deg)`;
+    });
+
+    typographyAccents.forEach((text, index) => {
+        const intensity = (index + 1) * 0.1;
+        const x = targetX * intensity * 10;
+        const y = targetY * intensity * 10;
+        text.style.transform = `translate(${x}px, ${y}px) rotate(${text.style.getPropertyValue('--text-rotation') || '0deg'}) scale(${1 + Math.abs(targetY) * 0.01})`;
+    });
+
+    requestAnimationFrame(updateParallax);
+}
+
+// Start parallax animation
+requestAnimationFrame(updateParallax);
+
+// Enhanced hover interactions for hero decorations
+const heroDecorations = document.querySelector('.hero-side-decorations');
+if (heroDecorations) {
+    heroDecorations.addEventListener('mouseenter', () => {
+        heroDecorations.style.filter = 'brightness(1.1)';
+    });
+
+    heroDecorations.addEventListener('mouseleave', () => {
+        heroDecorations.style.filter = 'brightness(1)';
+    });
+}
 
 console.log("🍰 Welcome to Gabi's Bakehouse - Where every bite tells a story!");
 
@@ -352,26 +446,6 @@ function createFloatingElement() {
 
 setInterval(createFloatingElement, 3000);
 
-// Sparkle Cursor Effect
-document.addEventListener('mousemove', (e) => {
-    if (Math.random() > 0.98) { // Only occasionally create sparkles
-        createSparkle(e.clientX, e.clientY);
-    }
-});
-
-function createSparkle(x, y) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle-cursor';
-    sparkle.style.left = x + 'px';
-    sparkle.style.top = y + 'px';
-
-    const colors = ['#8B5CF6', '#EC4899', '#F9A8D4'];
-    sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
-    sparkle.textContent = '✨';
-
-    document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 1000);
-}
 
 // Particle Effect on Button Click
 document.querySelectorAll('.btn-order, .btn-primary').forEach(button => {
@@ -416,39 +490,7 @@ document.querySelectorAll('.btn-order').forEach(button => {
     });
 });
 
-// Enhanced Stats Counter with Bounce
-const statObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-            entry.target.classList.add('counted');
-            const target = parseInt(entry.target.getAttribute('data-target'));
-            animateCounterWithBounce(entry.target, target);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.stat-number').forEach(stat => {
-    statObserver.observe(stat);
-});
-
-function animateCounterWithBounce(element, target) {
-    let current = 0;
-    const increment = target / 100;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + (element.dataset.suffix || '');
-            clearInterval(timer);
-            // Bounce effect
-            element.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                element.style.transform = 'scale(1)';
-            }, 200);
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, 20);
-}
+// Stats counters handled by anime.js in animations.js
 
 // Section Reveal Animations
 const revealObserver = new IntersectionObserver((entries) => {
@@ -467,11 +509,11 @@ document.querySelectorAll('section').forEach(section => {
 // Add today's special banner
 function addTodaysSpecial() {
     const specials = [
-        "🎂 Today's Special: 20% off Red Velvet Cakes!",
-        "🍪 Fresh Batch Alert: Chocolate Chip Cookies just out!",
-        "🧁 Limited Edition: Rose Pink Cupcakes available!",
-        "🥐 Morning Delight: Buy 2 Get 1 Free on Croissants!",
-        "🍰 Sweet Deal: Family Pack Brownies at Special Price!"
+        "🎂 Freshly Baked with love!",
+        "🍪 Fresh from the oven, straight to your heart!",
+        "🧁 Crafting joy, one bake at a time.",
+        "🥐 Pure ingredients, perfect taste!",
+        "🍰 Turn cravings into celebrations."
     ];
 
     const banner = document.createElement('div');
